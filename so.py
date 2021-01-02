@@ -17,10 +17,10 @@ def extract_job(last_page):
     jobs = []
     for page in range(last_page):
         result = requests.get(f"{URL}&pg={page+1}")
-        soup = BeautifulSoup(result.text, "html.parser")
-        results = soup.find_all("div", {"class": "-jobs"})
+        soup = Beautifulsoup(result.text, "html.parser")
+        results = soup.find_all("div".{"class":"-job"})
         for result in results:
-            print(result["data-job-id"])
+          print(result["data-jobid"])
 
 
 def get_jobs():
