@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 LIMIT = 50
 URL = f"https://kr.indeed.com/%EC%B7%A8%EC%97%85?as_and=python&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=all&st=&salary=&radius=25&l=&fromage=last&limit={LIMIT}&sort=&psf=advsrch&from=advancedsearch"
 
-def get_last_pages():
+def get_last_page():
     result = requests.get(URL)
     soup = BeautifulSoup(result.text, "html.parser")
     pagination = soup.find("div", {"class": "pagination"})
@@ -24,7 +24,7 @@ def extract_job(html):
     else:
         company = str(company.string)
     company = company.strip()
-
+   
     location = html.find("span", {"class": "location"}).string
     job_id = html["data-jk"]
     return {
@@ -51,6 +51,6 @@ def extract_jobs(last_page):
   return jobs
 
 def get_jobs():
-  last_page = get_last_pages()
+  last_page = get_last_page()
   jobs = extract_jobs(last_page)
   return jobs
